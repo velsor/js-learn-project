@@ -14,17 +14,15 @@ export default class PhonesPage {
     };
 
     this.render();
+  }
 
-    this.initComponent(PhonesCatalog, {
-      phones: this.state.phones,
-    });
+  setState(newState) {
+    this.state = {
+      ...this.state,
+      ...newState,
+    };
 
-    this.initComponent(PhoneViewer, {
-      phone: this.state.selectedPhone,
-    });
-
-    this.initComponent(ShoppingCart);
-    this.initComponent(Filter);
+    this.render();
   }
 
   initComponent(Constructor, props = {}) {
@@ -60,5 +58,21 @@ export default class PhonesPage {
         `}
     </div>
     `;
+     
+    this.initComponent(PhonesCatalog, {
+      phones: this.state.phones,
+      onPhoneSelected: (phoneId) => {
+        this.setState({
+          selectedPhone: getById(phoneId),
+        });
+      }
+    });
+
+    this.initComponent(PhoneViewer, {
+      phone: this.state.selectedPhone,
+    });
+
+    this.initComponent(ShoppingCart);
+    this.initComponent(Filter);
   }
 }
