@@ -29,7 +29,7 @@ export default class PhonesPage {
 
   initComponent(Constructor, props = {}) {
     const componentName = Constructor.name;
-    const element = this.element.querySelector(`[data-component="${Constructor.name}"]`);
+    const element = this.element.querySelector(`[data-component="${componentName}"]`);
 
     if (element) {
       new Constructor(element, props);
